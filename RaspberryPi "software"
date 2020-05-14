@@ -3,6 +3,12 @@ Here contains all information about how we used a Raspberry Pi to create a pheno
 Materials: raspberry pi, raspberry pi camera, basic andriod phone (for SSH)
 
 Setup a raspberry pi (general):
+-set the clock (https://stackoverflow.com/questions/25374570/how-to-update-date-and-time-of-raspberry-pi-with-out-internet) EACH time the raspberry pi turns on:
+
+
+
+
+
 
 Setup a raspberry pi (for a picture):
 
