@@ -1,2 +1,84 @@
 include here all information about logistics/operations of Bucksch Full Scale Phenotyper
+Contact for access: Suxing
 
+Goal: take pictures of a root mass using the Bucksch phenotyper, transfer photos to personal computer
+
+Sample:
+-max root size about 1.5ft long 
+-let root dry completely then remove any extra soil carefully - do not break main brace roots - because any parts covered are lessen accuracy of Suxings code "drawing" the roots
+
+Hardware:
+-key and permission from Suxing
+-obtain updated "3D rot scanner operation command line instruction" (incorporated below from version on October 10 2019) if any available from Suxing
+-Bucksch Full Scale Phenotyper
+-Bucksch router and grey cord (ethernet)
+-personal computer that has a port to accept grey cord (ethernet)
+
+
+Software:
+-Download "FileZilla"
+-Download "WinSCP"
+
+Begin:
+1. Turn on red power switch on extension cord to power Full Scale Phenotyper and Bucksch computer
+
+Username: pi
+Password: raspberry
+port: 20
+
+2. Carefully clean root sample and load into phenotyper using velcro to secure the stem so that the rootball is parallal to the counter. Make sure to keep counterspace clean and that the black camera cloth is secured to eliminate outside light.
+
+3. Use Bucksch computer:
+-Navigate to command line instruction (icon contains ">_") on Bucksch computer (Linex system), enter:
+cd code/cam
+python cluster_connection.py
+python camera_cluster.py
+[carefully listen for and observe without disturbing the phenotyper at work!]
+python camera_img_transfer.py -p /home/pi/code/cam/YEAR-MO-DA/ -a 1 
+[change folder name that photos appear in to label of speific plant ID]
+[copy folder of photos to personal computer]
+python camera_img_transfer.py -p /home/pi/code/cam/YEAR-MO-DA/ -a 2
+python stepper.py
+cd /home/pi/code/cam/ 
+rm - rf YEAR-MO-DA
+[repeat lines 32-40 for all samples, making sure to make unique sample/folder names and to delete all pictures off of pi cluster after each sample because there is not enough storage space on the cluster to hold that much]
+python cluster_shutdown.py
+
+
+Use Bucksch computer (with explanation):
+-Navigate to command line instruction (icon contains ">_") on Bucksch computer (Linex system), enter:
+cd code/cam (navigates to folder that contains Suxing's code; always need to enter this before starting)
+python cluster_connection.py (checks that all 10 Raspberry Pis are connected)
+python camera_cluster.py (begins the scanner!)
+[carefully listen for and observe without disturbing the phenotyper at work!]
+python camera_img_transfer.py -p /home/pi/code/cam/YEAR-MO-DA/ -a 1 (move files from each pi to the pi cluster)
+[change folder name that photos appear in to label of speific plant ID]
+
+[copy folder of photos to personal computer]
+
+python camera_img_transfer.py -p /home/pi/code/cam/YEAR-MO-DA/ -a 2 (delete files from pi cluster)
+python stepper.py (return arm to original possition for next sample)
+cd /home/pi/code/cam/ (navigates to pi cluster  folder that contains Suzing code)
+rm - rf YEAR-MO-DA/ (deletes folder from Raspberry pi cluster)
+[repeat lines 32-40 for all samples, making sure to make unique sample/folder names and to delete all pictures off of pi cluster after each sample because there is not enough storage space on the cluster to hold that much]
+python cluster_shutdown.py (shuts down the pi cluster)
+
+Connect personal computer to Bucksch router with grey ethernet cord
+Open program WinSCP
+File protocol: SCP
+host name: 192.168.1.110 (IP address of host raspberry pi cluster)
+port number: 22
+username: pi
+password: raspberry
+
+Drag and drop the file from the Bucksch computer to personal computer
+
+Convert file to a 7zip  (right click> add to zip file)
+
+Add file to OneDrive folder immedatiately for review by Naomi and Suxing!
+
+Make sure that the files are on your computer before removing files from Bucksch computer and Raspberry Pi and make sure that you delete all files off of raspberry pi before finishing for the day.
+
+Switch off extenstion cord power strip once finished with taking pictures for the day.
+
+Makes sure to keep area neat and tidy for next user. Make it easy for the next user (arm in start position, samples put away, cords wrapped up, etc).
